@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icons8-note-64.png" />
+    <None Remove="outline_home_black_48dp.png" />
+    <None Remove="outline_note_add_black_48dp.png" />
+    <None Remove="outline_settings_black_48dp.png" />
+    <None Remove="Pages\Add.png" />
+    <None Remove="Pages\CharacterGrowFont.png" />
+    <None Remove="Pages\CharacterShrinkFont.png" />
+    <None Remove="Pages\Edit.png" />
+    <None Remove="Pages\EditCopy.png" />
+    <None Remove="Pages\EditCut.png" />
+    <None Remove="Pages\EditPaste.png" />
+    <None Remove="Pages\EditRedo.png" />
+    <None Remove="Pages\EditUndo.png" />
+    <None Remove="Pages\ListBullets.png" />
+    <None Remove="Pages\ListNumbering.png" />
+    <None Remove="Pages\Load.png" />
+    <None Remove="Pages\ParagraphCenterJustify.png" />
+    <None Remove="Pages\ParagraphDecreaseIndentation.png" />
+    <None Remove="Pages\ParagraphFullJustify.png" />
+    <None Remove="Pages\ParagraphIncreaseIndentation.png" />
+    <None Remove="Pages\ParagraphLeftJustify.png" />
+    <None Remove="Pages\ParagraphRightJustify.png" />
+    <None Remove="Pages\Print.png" />
+    <None Remove="Pages\refresh.png" />
+    <None Remove="Pages\Remove.png" />
+    <None Remove="Pages\Save.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icons8-note-64.png" />
+    <Resource Include="outline_home_black_48dp.png" />
+    <Resource Include="outline_note_add_black_48dp.png" />
+    <Resource Include="outline_settings_black_48dp.png" />
+    <Resource Include="Pages\Add.png" />
+    <Resource Include="Pages\CharacterGrowFont.png" />
+    <Resource Include="Pages\CharacterShrinkFont.png" />
+    <Resource Include="Pages\Edit.png" />
+    <Resource Include="Pages\EditCopy.png" />
+    <Resource Include="Pages\EditCut.png" />
+    <Resource Include="Pages\EditPaste.png" />
+    <Resource Include="Pages\EditRedo.png" />
+    <Resource Include="Pages\EditUndo.png" />
+    <Resource Include="Pages\ListBullets.png" />
+    <Resource Include="Pages\ListNumbering.png" />
+    <Resource Include="Pages\Load.png" />
+    <Resource Include="Pages\ParagraphCenterJustify.png" />
+    <Resource Include="Pages\ParagraphDecreaseIndentation.png" />
+    <Resource Include="Pages\ParagraphFullJustify.png" />
+    <Resource Include="Pages\ParagraphIncreaseIndentation.png" />
+    <Resource Include="Pages\ParagraphLeftJustify.png" />
+    <Resource Include="Pages\ParagraphRightJustify.png" />
+    <Resource Include="Pages\Print.png" />
+    <Resource Include="Pages\refresh.png" />
+    <Resource Include="Pages\Remove.png" />
+    <Resource Include="Pages\Save.png" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,197 @@
+
+
+public DataTable Get DataTable(string str)
+{
+try
+{
+if (!Open())
+{
+MessageBox.Show("لا يمكن الاتصال بقاعدة البيانات");
+ return null;
+}
+SqlCommand comm= new SqlCommand (str, sqlconn); 
+DataTable dt = new DataTable(); 
+SqlDataAdapter da = new SqlDataAdapter (comm);
+ da.Fill (dt);
+return dt;
+
+catch (Exception)
+{
+ MessageBox. Show("خطا في جلب البيانات");
+}
+
+
+
+
+
+
+public partial class MainWindow: Window
+
+public MainWindow()
+{
+InitializeComponent(); 
+new SQL_CLASS ().Open();
+}
+
+public void Refresh_ListView()
+{
+LV_Contacts. Items Source = new SQL_CLASS().Get_DataTable("select from T_Contacts").DefaultView;
+}
+
+
+
+
+
+
+
+
+
+
+<ListView.View >
+
+<GridView >
+
+<GridViewColumn Header="" Width="200">
+
+<GridViewColumin.CellTemplate> 
+<DataTemplate>
+<TextBlock Text="{Binding contact_name}"/>
+</Data Template>
+</GridviewColumn.CellTemplate>
+</GridViewColumn>
+
+
+
+
+using System.Data;
+
+using System.Data.SqlClient;
+
+using System.Windows;
+
+namespace WpfApp_TEL
+
+{
+public class SQL_CLASS
+{
+public SqlConnection sqlconn;
+
+public SQL_CLASS()
+
+{
+
+string strconn = "Data Source=.; Initial Catalog-DB_contacts; user id-sqluser; pass
+
+sqlconn = new SqlConnection(strconn);
+}
+
+
+public bool open()
+{
+try
+{
+if (sqlconn.State != ConnectionState.Open)
+{
+sqlconn.Open();
+
+if (sqlconn.State == ConnectionState.Open)
+{
+MessageBox.Show("connected 100%");
+
+return true;
+}
+else
+{
+MessageBox.Show("failed II); 
+retur false;
+}
+else
+{
+return true;
+
+}
+
+catch (Exception)
+
+{
+
+MessageBox. Show("failed !!");
+ return false;
+}
+}}
+dublic void Close()
+
+{
+
+if (sqlconn. State == ConnectionState.Open)
+
+{
+
+sqlconn.Close();
+
+}}
+}}
+
+
+<Slider Name="mySlider"></Slider> 
+<TextBox Text="{Binding ElementName=mySlider ,Path=Value, Mode=TwoWay}" 
+Margin="0,31,0,-31"></TextBox>
+
+<TextBox Name="MyTextBox">Text Here</TextBox> 
+ <TextBlock Margin="139,1,-139,-1"> 
+ <TextBlock.Text> 
+ <Binding ElementName="MyTextBox" Path="Text.Length"></Binding> 
+ </TextBlock.Text> 
+ </TextBlock>
+
+
+
+
+
+
+
+
+
+<UserControl> 
+ <UserControl.Resources> 
+ <local:ConverterClass x:Key="MyConverter"/> 
+ </UserControl.Resources> 
+  
+ <Grid> 
+ <ComboBox Height="20" Margin="0,-400,0,0" Name="MyComboBox"> 
+ <ComboBoxItem>1</ComboBoxItem> 
+ <ComboBoxItem>5</ComboBoxItem> 
+ <ComboBoxItem>10</ComboBoxItem> 
+ <ComboBoxItem>20</ComboBoxItem> 
+ </ComboBox> 
+ <Border BorderBrush="GreenYellow" 
+ BorderThickness="{Binding ElementName=MyComboBox, 
+Path=SelectedValue ,Converter={StaticResource MyConverter}}" 
+ Margin="27,59,48,47"> 
+  
+ </Border> 
+ </Grid> 
+ </UserControl> 
+</Window>
+
+
+class ConverterClass:IValueConverter 
+ { 
+ int returnVal; 
+ public object Convert(object value, Type targetType, object parameter,  
+System.Globalization.CultureInfo culture) 
+ { 
+  
+ if(value!=null) 
+ { 
+ String ThicknessVal = ((ComboBoxItem)value).Content.ToString(); 
+ returnVal = Int32.Parse(ThicknessVal); 
+ } 
+ return returnVal; 
+ } 
+ public object ConvertBack(object value, Type targetType, object parameter,  
+System.Globalization.CultureInfo culture) 
+ { 
+ } 
+ }
+

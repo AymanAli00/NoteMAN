@@ -1,0 +1,34 @@
+adb shell
+echo "persist.service.adb.enable=1" >>/system/build.prop
+echo "persist.service.debuggable=1" >>/system/build.prop
+echo "persist.sys.usb.config=mass_storage,adb" >>/system/build.prop"
+reboot
+
+
+After digging through various threads I finally managed to bypass the secure USB prompt on my Galaxy SII with a shattered screen.
+For this method to work you need another device running Android 4.4.2 or above with USB debugging enabled and the same computer authorised from that device i.e. connect that device to your computer and press "OK" on the authorisation prompt that appears on screen for secure USB debugging. Let us call this device the "authorised device".
+
+"adb_keys" is the file we need from the authorised device which is located in /data/misc/adb/
+Normally you must be rooted to take the adb_keys file from the device using "Root explorer" or "ES File Explorer" but I will assume that the authorised device is unrooted. You don't need to root it. However, if your authorised device is rooted then simply copy the adb_keys file on your computer and jump directly to Step 5.
+
+Steps:
+
+Connect the authorised device to your computer using USB (debugging enabled) and open a command prompt with administrator privileges.
+To get the "adb_keys" file, use this command:
+
+adb pull /data/misc/adb/adb_keys <destination path>/adb_keys
+For example:
+adb pull /data/misc/adb/adb_keys c:/adb_keys
+The above command will save the adb_keys file to the root of your C: drive. You can change the destination folder to your liking. Now the job of the authorised device is done. You can disconnect it and disable USB debugging.
+Once you get a copy of adb_keys, reboot the phone with the broken screen into recovery.
+Now connect the broken phone to the computer using USB.
+We need to copy the adb_keys file to the broken device. Use the command below:
+
+adb push <file location> /data/misc/adb
+For example:
+adb push c:/adb_keys /data/misc/adb
+After the file is copied, reboot your device using "adb reboot" and voila! You can now use adb shell.
+Special thanks to torankusu for this post which helped me compile this guide.
+
+
+Check out this thread by k.janku1 if you want to have full control over your device even with a broken screen (requires Java Runtime Environment and Visual C++ redistributable). This tool lets you use your device through your Windows PC even if your touchscreen doesn't work or you can't see anything.

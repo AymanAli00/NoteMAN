@@ -1,0 +1,137 @@
+﻿<Window x:Class="NoteMAN.noteViewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NoteMAN"
+        mc:Ignorable="d"
+        Title="noteViewer" Height="555" d:Width="685" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Width="685">
+        <Border CornerRadius="8" Background="White" Width="685" Height="540">
+            <Grid Width="685" Height="540">
+                <!-- Set the styles for the tool bar. -->
+                <Grid.Resources>
+                    <Style TargetType="{x:Type Button}" x:Key="formatTextStyle">
+                        <Setter Property="FontFamily" Value="Palatino Linotype"></Setter>
+                        <Setter Property="Width" Value="30"></Setter>
+                        <Setter Property="FontSize" Value ="14"></Setter>
+                        <Setter Property="CommandTarget" Value="{Binding ElementName=mainRTB}"></Setter>
+                    </Style>
+
+                    <Style TargetType="{x:Type Button}" x:Key="formatImageStyle">
+                        <Setter Property="Width" Value="30"></Setter>
+                        <Setter Property="CommandTarget" Value="{Binding ElementName=mainRTB}"></Setter>
+                    </Style>
+                </Grid.Resources>
+                <Border CornerRadius="8,8,8,8" HorizontalAlignment="Stretch" Height="46" Margin="0,10,0,0" VerticalAlignment="Top" Width="666" BorderBrush="Black" BorderThickness="2,2,2,2" Padding="10,0,10,0" >
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="30">
+                        <TextBox x:Name="noteTitle" TextWrapping="Wrap" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderThickness="0,0,0,0" BorderBrush="#FF005FB8" ToolTip="Note Name" Height="25" Width="514" HorizontalAlignment="Left" FontSize="15" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,2.5,15,0" AutomationProperties.HelpText="Add a name to your note"/>
+                        <Button Click="SaveRTBContent" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Width="30" VerticalAlignment="Center" Height="30" Margin="5,0,0,0" ToolTip="Save">
+                            <Image Source="/Pages/Save.png"/>
+                        </Button>
+                        <Button Click="LoadRTBContent" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Width="30" VerticalAlignment="Center" Height="30" Margin="5,0,0,0" ToolTip="Load">
+                            <Image Source="/Pages/Load.png"/>
+                        </Button>
+                        <Button Click="PrintRTBContent" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Width="30" VerticalAlignment="Center" Height="30" Margin="5,0,0,0" ToolTip="Print">
+                            <Image Source="/Pages/Print.png"/>
+                        </Button>
+                    </WrapPanel>
+
+                </Border>
+                <Border CornerRadius="8,8,8,8" HorizontalAlignment="Stretch" Height="459" VerticalAlignment="Top" Width="666" Margin="0,61,0,0" BorderThickness="2,2,2,2" BorderBrush="Black" >
+
+
+                    <DockPanel Name="mainPanel" Margin="0,0,0,5">
+
+                        <!-- This tool bar contains all the editing buttons. -->
+
+                        <!-- By default pressing tab moves focus to the next control. Setting AcceptsTab to true allows the 
+           RichTextBox to accept tab characters. -->
+                        <Border CornerRadius="8,8,0,0" Height="33" DockPanel.Dock="Top" BorderBrush="Black" BorderThickness="0,0,0,2">
+                            <ToolBar x:Name="mainToolBar">
+
+                                <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Cut" ToolTip="Cut">
+                                    <Image Source="/Pages/EditCut.png"/>
+                                </Button>
+                                <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Copy" ToolTip="Copy">
+                                    <Image Source="/Pages/EditCopy.png"/>
+                                </Button>
+                                <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Paste" ToolTip="Paste">
+                                    <Image Source="/Pages/EditPaste.png"/>
+                                </Button>
+                                <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Undo" ToolTip="Undo">
+                                    <Image Source="/Pages/EditUndo.png"/>
+                                </Button>
+                                <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Redo" ToolTip="Redo">
+                                    <Image Source="/Pages/EditRedo.png"/>
+                                </Button>
+
+                                <Button Style="{StaticResource formatTextStyle}" Command="EditingCommands.ToggleBold" ToolTip="Bold">
+                                    <TextBlock FontWeight="Bold"><Run Text="B"/></TextBlock>
+                                </Button>
+                                <Button Style="{StaticResource formatTextStyle}" Command="EditingCommands.ToggleItalic" ToolTip="Italic">
+                                    <TextBlock FontStyle="Italic" FontWeight="Bold"><Run Text="I"/></TextBlock>
+                                </Button>
+                                <Button Style="{StaticResource formatTextStyle}" Command="EditingCommands.ToggleUnderline" ToolTip="Underline">
+                                    <TextBlock TextDecorations="Underline" FontWeight="Bold"><Run Text="U"/></TextBlock>
+                                </Button>
+                                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.IncreaseFontSize" ToolTip="Grow Font">
+                                    <Image Source="/Pages/CharacterGrowFont.png"/>
+                                </Button>
+                                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.DecreaseFontSize" ToolTip="Shrink Font">
+                                    <Image Source="/Pages/CharacterShrinkFont.png"/>
+                                </Button>
+
+                                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.ToggleBullets" ToolTip="Bullets">
+                                    <Image Source="/Pages/ListBullets.png"/>
+                                </Button>
+                                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.ToggleNumbering" ToolTip="Numbering">
+                                    <Image Source="/Pages/ListNumbering.png"/>
+                                </Button>
+                                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignLeft" ToolTip="Align Left">
+                                    <Image Source="/Pages/ParagraphLeftJustify.png"/>
+                                </Button>
+                                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignCenter" ToolTip="Align Center">
+                                    <Image Source="/Pages/ParagraphCenterJustify.png"/>
+                                </Button>
+                                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignRight" ToolTip="Align Right">
+                                    <Image Source="/Pages/ParagraphRightJustify.png"/>
+                                </Button>
+                                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignJustify" ToolTip="Align Justify">
+                                    <Image Source="/Pages/ParagraphFullJustify.png"/>
+                                </Button>
+                                <!--Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.IncreaseIndentation" ToolTip="Increase Indent">
+                                <Image Source="/Pages/ParagraphIncreaseIndentation.png"/>
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.DecreaseIndentation" ToolTip="Decrease Indent">
+                                <Image Source="/Pages/ParagraphDecreaseIndentation.png"/>
+                            </Button-->
+
+                            </ToolBar>
+
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="0,0,0,0" CornerRadius="0,0,8,8">
+                            <WrapPanel>
+                                <RichTextBox x:Name="noteContent" BorderBrush="#FF738DDC" Padding="10,10,10,10" FontSize="15" BorderThickness="0,0,0,0" Background="White" ToolTip="Note Content" ScrollViewer.CanContentScroll="True" UndoLimit="1000" Width="662" VerticalScrollBarVisibility="Auto" Height="393">
+                                    <FlowDocument>
+                                        <Paragraph>
+                                            <Run Text=""/>
+                                        </Paragraph>
+                                    </FlowDocument>
+                                </RichTextBox>
+                                <!--StatusBar Height="20" Width="662" Background="White" BorderBrush="Black" BorderThickness="0,1,0,0">
+                                    <TextBlock x:Name="wordCount" Height="16" Text="0" TextWrapping="Wrap" Width="38" FlowDirection="RightToLeft" TextAlignment="Center"/>
+                                    <Label Content="Words" Height="16" Width="37" Padding="0,0,0,0"/>
+                                </StatusBar-->
+
+                            </WrapPanel>
+
+                        </Border>
+
+                        <!-- By default pressing tab moves focus to the next control. Setting AcceptsTab to true allows the 
+           RichTextBox to accept tab characters. -->
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+</Window>

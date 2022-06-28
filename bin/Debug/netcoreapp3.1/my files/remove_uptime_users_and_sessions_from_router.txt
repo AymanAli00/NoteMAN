@@ -1,0 +1,11 @@
+/ip hotspot disable [find ];
+/tool user-manager user remove [find where !actual-profile and uptime-used>0s];
+/tool user-manager session close-session [find ] ;
+/tool user-manager session remove [find ] ;
+/tool user-manager log remove [find ] ;
+/tool user-manager database rebuild;
+/delay 20;
+/tool user-manager database rebuild-log;
+/delay 20;
+/ip hotspot enable [find ];
+/system reboot;
