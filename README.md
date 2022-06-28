@@ -1,2 +1,3 @@
 # NoteMAN
  
+the application was written with <a href="https://github.com/dotnet/wpf#windows-presentation-foundation-wpf" target="_blank">WPF</a> Framework using C# ...
